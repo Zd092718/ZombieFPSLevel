@@ -222,7 +222,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6d38e47a648c3964c9b9876eab9f505d, type: 3}
   - {fileID: 8300000, guid: b973751bba28f6842a0f63f9204995d8, type: 3}
   moveSpeed: 10
-  jumpForce: 8
+  jumpForce: 5
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 64

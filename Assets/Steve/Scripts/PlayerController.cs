@@ -226,7 +226,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (IsGrounded()) audioSource.PlayOneShot(audioClips[1]);
+        if (IsGrounded() && collision.gameObject.CompareTag("Ground")) audioSource.PlayOneShot(audioClips[1]);
 
 
     }
