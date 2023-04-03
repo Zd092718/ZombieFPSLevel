@@ -2646,10 +2646,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -3058084110106891213, guid: d5b7cf80f1fab4ea0bd49a0e878214fe, type: 3}
-      propertyPath: m_StoppingDistance
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 1099347172983380646, guid: d5b7cf80f1fab4ea0bd49a0e878214fe, type: 3}
       propertyPath: m_Name
       value: boss
@@ -2661,6 +2657,18 @@ PrefabInstance:
     - target: {fileID: 4114869168490670261, guid: d5b7cf80f1fab4ea0bd49a0e878214fe, type: 3}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4114869168490670261, guid: d5b7cf80f1fab4ea0bd49a0e878214fe, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4114869168490670261, guid: d5b7cf80f1fab4ea0bd49a0e878214fe, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4114869168490670261, guid: d5b7cf80f1fab4ea0bd49a0e878214fe, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4114869168490670261, guid: d5b7cf80f1fab4ea0bd49a0e878214fe, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3711,6 +3719,10 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 856686590}
+    - target: {fileID: 1669740224255589216, guid: 6a1d6fe89cd7e4fe486e4cabf09b8d3d, type: 3}
+      propertyPath: walkingSpeed
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5176861845160572960, guid: 6a1d6fe89cd7e4fe486e4cabf09b8d3d, type: 3}
       propertyPath: m_Name
       value: zombieman
@@ -6050,8 +6062,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.4468827, y: 2.797818, z: 3.2023742}
-  m_Center: {x: -0.018395245, y: -0.0049003363, z: 0.00038909912}
+  m_Size: {x: 3.4468827, y: 2.19931, z: 3.2023742}
+  m_Center: {x: -0.018395185, y: -0.30415428, z: 0.00038909912}
 --- !u!1001 &2023788721
 PrefabInstance:
   m_ObjectHideFlags: 0
