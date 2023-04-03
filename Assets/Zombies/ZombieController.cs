@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,6 +9,7 @@ public class ZombieController : MonoBehaviour
     [SerializeField] private GameObject target;
     [SerializeField] private float walkingSpeed;
     [SerializeField] private float runningSpeed;
+    [SerializeField] private GameObject ragdoll;
     private Animator anim;
     private NavMeshAgent agent;
 
@@ -58,7 +60,24 @@ public class ZombieController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(target == null)
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            int randomNum = Random.Range(0, 10);
+            if (randomNum <= 5)
+            {
+                GameObject rd = Instantiate(ragdoll, this.transform.position, this.transform.rotation);
+                rd.transform.Find("Hips").GetComponent<Rigidbody>().AddForce(Camera.main.transform.forward * 10000);
+                Destroy(this.gameObject);
+            } else if(randomNum > 5)
+            {
+                TurnOffTriggers();
+                agent.enabled = false;
+                anim.SetTrigger("Death");
+                state = State.DEAD;
+            }
+            return;
+        }
+        if (target == null)
         {
             target = GameObject.FindWithTag("Player");
             return;
@@ -91,7 +110,8 @@ public class ZombieController : MonoBehaviour
                 if (CanSeePlayer())
                 {
                     state = State.CHASE;
-                } else if(Random.Range(0, 5000) < 5)
+                }
+                else if (Random.Range(0, 5000) < 5)
                 {
                     state = State.IDLE;
                     TurnOffTriggers();

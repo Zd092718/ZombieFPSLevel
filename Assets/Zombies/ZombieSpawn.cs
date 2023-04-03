@@ -9,6 +9,7 @@ public class ZombieSpawn : MonoBehaviour
     [SerializeField] private int spawnCount;
     [SerializeField] private float spawnRadius;
     [SerializeField] private bool spawnOnStart = true;
+    [SerializeField] private int amountsTriggered;
 
     // Start is called before the first frame update
     void Start()
@@ -24,11 +25,18 @@ public class ZombieSpawn : MonoBehaviour
         if (!spawnOnStart && other.gameObject.CompareTag("Player"))
         {
             SpawnAll();
+            amountsTriggered++;
+        }
+
+        if(amountsTriggered >= 3)
+        {
+            gameObject.GetComponent<Collider>().enabled = false;
         }
     }
 
     private void SpawnAll()
     {
+        spawnCount = Random.Range(6, 30);
         for (int i = 0; i < spawnCount; i++)
         {
             Vector3 randomPoint = this.transform.position + Random.insideUnitSphere * spawnRadius;
