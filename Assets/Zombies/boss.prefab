@@ -387,7 +387,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45f731446484ad646b6372979395bfd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 6163301976934702752, guid: 18c5707e115a0354d881ffcfb99071f8, type: 3}
   walkingSpeed: 2
   runningSpeed: 2
 --- !u!195 &-3058084110106891213

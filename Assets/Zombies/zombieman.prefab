@@ -1809,7 +1809,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  walkingSpeed: 1
+  walkingSpeed: 1.5
   runningSpeed: 3
 --- !u!195 &8537877307409158184
 NavMeshAgent:

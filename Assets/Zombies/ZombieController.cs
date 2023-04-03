@@ -14,6 +14,8 @@ public class ZombieController : MonoBehaviour
     private enum State { IDLE, WANDER, ATTACK, CHASE, DEAD };
     private State state = State.IDLE;
 
+    public GameObject Target { get => target; set => target = value; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +33,7 @@ public class ZombieController : MonoBehaviour
 
     private float DistanceToPlayer()
     {
-        return Vector3.Distance(target.transform.position, transform.position);
+        return Vector3.Distance(Target.transform.position, transform.position);
     }
 
     private bool CanSeePlayer()
@@ -56,6 +58,11 @@ public class ZombieController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(target == null)
+        {
+            target = GameObject.FindWithTag("Player");
+            return;
+        }
         switch (state)
         {
             case State.IDLE:
@@ -92,7 +99,7 @@ public class ZombieController : MonoBehaviour
                 }
                 break;
             case State.CHASE:
-                agent.SetDestination(target.transform.position);
+                agent.SetDestination(Target.transform.position);
                 agent.stoppingDistance = 3;
                 agent.speed = runningSpeed;
                 TurnOffTriggers();
@@ -113,7 +120,7 @@ public class ZombieController : MonoBehaviour
             case State.ATTACK:
                 TurnOffTriggers();
                 anim.SetBool("IsAttacking", true);
-                transform.LookAt(target.transform.position + new Vector3(0, -1, 0));
+                transform.LookAt(Target.transform.position + new Vector3(0, -1, 0));
                 if (DistanceToPlayer() > agent.stoppingDistance + 2)
                 {
                     state = State.CHASE;
