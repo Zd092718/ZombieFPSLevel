@@ -31,17 +31,18 @@ public class PlayerController : MonoBehaviour
     #endregion
     #region Properties
     [SerializeField] private Animator anim;
+    [SerializeField] private Transform shotPoint;
     private PlayerInput playerInput;
     private Rigidbody rb;
     private CapsuleCollider capsule;
     #endregion
 
     [Header("Inventory")]
-    [SerializeField] private int ammo = 0;
+    [SerializeField] private int ammo = 50;
     [SerializeField] private int health = 80;
     private int maxHealth = 100;
     private int maxAmmo = 50;
-    [SerializeField] private int ammoMagazine = 0;
+    [SerializeField] private int ammoMagazine = 15;
     private int ammoMagazineMax = 15;
 
     private void Awake()
@@ -154,6 +155,30 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void ProcessZombieHit()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(shotPoint.position, shotPoint.forward, out hit, 200))
+        {
+            GameObject hitZombie = hit.collider.gameObject;
+            if (hitZombie.CompareTag("Zombie"))
+            {
+                ZombieController zc = hitZombie.GetComponent<ZombieController>();
+                if (Random.Range(0, 10) < 5)
+                {
+                    GameObject ragdollPrefab = zc.Ragdoll;
+                    GameObject newRagdoll = Instantiate(ragdollPrefab, hitZombie.transform.position, hitZombie.transform.rotation);
+                    newRagdoll.transform.Find("Hips").GetComponent<Rigidbody>().AddForce(shotPoint.forward * 10000);
+                    Destroy(hitZombie);
+                }
+                else
+                {
+                    zc.KillZombie();
+                }
+            }
+        }
+    }
+
     #region Control Input Functions
     public void OnLook(InputAction.CallbackContext context)
     {
@@ -193,6 +218,7 @@ public class PlayerController : MonoBehaviour
             if (ammoMagazine > 0)
             {
                 anim.SetTrigger("fire");
+                ProcessZombieHit();
                 ExpendAmmo();
             }
             else
@@ -206,10 +232,13 @@ public class PlayerController : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            if (ammoMagazine != ammoMagazineMax)
+            if (ammo > 0)
             {
-                anim.SetTrigger("reload");
-                Reload();
+                if (ammoMagazine != ammoMagazineMax)
+                {
+                    anim.SetTrigger("reload");
+                    Reload();
+                }
             }
 
         }

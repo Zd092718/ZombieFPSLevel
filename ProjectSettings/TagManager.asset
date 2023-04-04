@@ -8,6 +8,8 @@ TagManager:
   - Ammo
   - Hazard
   - Ground
+  - Zombie
+  - Boss
   layers:
   - Default
   - TransparentFX
@@ -15,7 +17,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Zombie
   - 
   - 
   - 
